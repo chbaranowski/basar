@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="kasseUli" class="basar.remoteclient.impl.CashpointRemoteClientImpl">
+		<property name="service">
+			<bean class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+				<property name="serviceUrl"
+					value="http://192.168.0.23:8080/kasse/remoting/CashpointRemoteService" />
+				<property name="serviceInterface" value="basar.remote.CashpointRemoteService" />
+				<property name="httpInvokerRequestExecutor">
+					<bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
+						<property name="httpClient">
+							<bean class="org.apache.commons.httpclient.HttpClient">
+								<property name="connectionTimeout" value="250" />
+							</bean>
+						</property>
+					</bean>		
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="kasseFabienne" class="basar.remoteclient.impl.CashpointRemoteClientImpl">
+		<property name="service">
+			<bean class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+				<property name="serviceUrl"
+					value="http://192.168.0.24:8080/kasse/remoting/CashpointRemoteService" />
+				<property name="serviceInterface" value="basar.remote.CashpointRemoteService" />
+				<property name="httpInvokerRequestExecutor">
+					<bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
+						<property name="httpClient">
+							<bean class="org.apache.commons.httpclient.HttpClient">
+								<property name="connectionTimeout" value="250" />
+							</bean>
+						</property>
+					</bean>		
+				</property>
+			</bean>
+		</property>
+	</bean>
+	 
+</beans>
