@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="uebersicht" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<queryString language="xPath">
+		<![CDATA[/documents/document]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[name]]></fieldDescription>
+	</field>
+	<field name="proceeds" class="java.lang.String">
+		<fieldDescription><![CDATA[proceeds]]></fieldDescription>
+	</field>
+	<field name="basarNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[basarNumber]]></fieldDescription>
+	</field>
+	<pageHeader>
+		<band height="24" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="13" width="100" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nummer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="13" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Verdana" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Erlös]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="506" y="13" width="296" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unterschrift]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="802" height="33"/>
+			</rectangle>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="20" width="100" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{basarNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="20" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Verdana" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proceeds}+"Euro"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="492" y="39" width="299" height="1"/>
+			</line>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="802" height="45"/>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

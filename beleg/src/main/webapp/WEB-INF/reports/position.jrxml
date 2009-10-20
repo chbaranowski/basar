@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="position" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+	<parameter name="basarNumber" class="java.lang.String"/>
+	<queryString language="xPath">
+		<![CDATA[/documents/document[basarNumber=$P{basarNumber}]/positions/position]]>
+	</queryString>
+	<field name="nr" class="java.lang.String">
+		<fieldDescription><![CDATA[position]]></fieldDescription>
+	</field>
+	<field name="preis" class="java.lang.String">
+		<fieldDescription><![CDATA[price]]></fieldDescription>
+	</field>
+	<field name="beschreibung" class="java.lang.String">
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="19" width="47" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<text><![CDATA[Nr.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="19" width="231" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<text><![CDATA[Beschreibung:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="353" y="19" width="90" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<text><![CDATA[Preis:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="42" width="446" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="2" width="47" height="20"/>
+				<textElement>
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="2" width="231" height="20">
+					<printWhenExpression><![CDATA[$F{beschreibung} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{beschreibung}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="2" width="115" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Verdana" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{preis}+" Euro"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
