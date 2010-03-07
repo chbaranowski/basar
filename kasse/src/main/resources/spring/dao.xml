@@ -29,7 +29,7 @@
 		</property>
 	</bean>
 	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" destroy-method="close">
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${database.driver}"/>
         <property name="url" value="${database.url}"/>
         <property name="username" value="${database.username}"/>
@@ -40,7 +40,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	
-	<bean class=" basar.domain.Configuration">
+	<bean class="basar.domain.Configuration">
 		<property name="kasseName" value="${kasse.name}"></property>
 		<property name="prozent" value="${kasse.prozent}"></property>
 	</bean>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>basar</groupId>
 	<artifactId>kasse</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1</version>
-	
+
 	<build>
 		<plugins>
-		
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -18,7 +18,7 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
@@ -29,30 +29,30 @@
 					</additionalProjectFacets>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
-	
+
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.0.5</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
 			<version>10.4.2.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring</artifactId>
@@ -74,7 +74,7 @@
 			<version>2.5.6</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>persistence-api</artifactId>
@@ -85,7 +85,7 @@
 			<artifactId>jta</artifactId>
 			<version>1.1</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate</artifactId>
@@ -101,7 +101,7 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.3.2.GA</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -122,13 +122,13 @@
 			<artifactId>myfaces-impl</artifactId>
 			<version>1.2.4</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>xstream</groupId>
 			<artifactId>xstream</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -148,27 +148,32 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-      		<groupId>org.jdave</groupId>
-      		<artifactId>jdave-junit4</artifactId>
-      		<version>1.1</version>
-      		<scope>test</scope>
-    	</dependency>
+			<groupId>org.jdave</groupId>
+			<artifactId>jdave-junit4</artifactId>
+			<version>1.1</version>
+			<scope>test</scope>
+		</dependency>
 		
 		
-		
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.6</version>
+		</dependency>
+
 	</dependencies>
-	
+
 	<repositories>
-	    <repository>
-	      <id>laughing-panda</id>
-	      <name>Laughing Panda</name>
-	      <url>http://www.laughingpanda.org/maven2/</url>
-	    </repository>
-	     <repository>
-	      <id>selenium</id>
-	      <name>selenium</name>
-	      <url>http://maven.openqa.org</url>
-	    </repository>
+		<repository>
+			<id>laughing-panda</id>
+			<name>Laughing Panda</name>
+			<url>http://www.laughingpanda.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>selenium</id>
+			<name>selenium</name>
+			<url>http://maven.openqa.org</url>
+		</repository>
 	</repositories>
-	
+
 </project>

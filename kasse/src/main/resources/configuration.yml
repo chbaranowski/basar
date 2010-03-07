@@ -1,0 +1,12 @@
+#
+# Database Configuration
+#
+database:
+  username: root
+  password: test
+# 
+# Kasse Configuration
+#
+kasse:
+  name: fabienneKasse
+  prozent: 20 
