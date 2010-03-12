@@ -1,6 +1,7 @@
 package basar.configuration;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -8,7 +9,6 @@ import java.net.URL;
 import org.junit.Test;
 import org.yaml.snakeyaml.JavaBeanLoader;
 import org.yaml.snakeyaml.TypeDescription;
-import org.yaml.snakeyaml.Yaml;
 
 import basar.config.Configuration;
 import basar.config.Database;
@@ -23,10 +23,8 @@ public class YmlTest {
 		assertNotNull(resource);
 		
 		InputStream ins = resource.openStream();
-		Yaml yaml = new Yaml();
 		
 		TypeDescription typeDescription = new TypeDescription(Configuration.class, "!configuration");
-		typeDescription.putMapPropertyType("database", Database.class, String.class);
 		JavaBeanLoader<Configuration> loader = 
 			new JavaBeanLoader<Configuration>(typeDescription);
 		
@@ -40,6 +38,8 @@ public class YmlTest {
 		assertEquals("fabienneKasse", kasse.getName());
 		assertEquals(20, kasse.getProzent());
 	}
+	
+	
 	
 	
 }

@@ -12,7 +12,11 @@
 	
 	<context:annotation-config />
 
-	<context:component-scan base-package="basar" />
+	<context:component-scan base-package="basar.dao" />
+	<context:component-scan base-package="basar.domain" />
+	<context:component-scan base-package="basar.remote" />
+	<context:component-scan base-package="basar.remoteclient" />
+	<context:component-scan base-package="basar.web" />
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	

@@ -8,10 +8,10 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-  			classpath:spring/dao.xml;
-  			classpath:spring/remote.xml;
-  			classpath:spring/service.xml
-  		</param-value>
+			classpath:spring/dao.xml;
+			classpath:spring/remote.xml;
+			classpath:spring/service.xml
+	  		</param-value>
 	</context-param>
 
 	<servlet>
@@ -38,20 +38,39 @@
 
 	<servlet>
 		<servlet-name>cashpointRemoteServiceExporter</servlet-name>
-		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet
+		</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>cashpointRemoteServiceExporter</servlet-name>
 		<url-pattern>/remoting/CashpointRemoteService</url-pattern>
 	</servlet-mapping>
- 
+
+	<servlet>
+		<servlet-name>Jersey</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer
+		</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>basar.rest</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Jersey</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class>
 	</listener>
 
 	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+		<listener-class>org.springframework.web.context.request.RequestContextListener
+		</listener-class>
 	</listener>
 
 </web-app>

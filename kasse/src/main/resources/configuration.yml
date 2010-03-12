@@ -5,8 +5,8 @@ database:
   username: root
   password: test
 # 
-# Kasse Configuration
+# cash point Configuration
 #
-kasse:
+cashPoint:
   name: fabienneKasse
   prozent: 20 

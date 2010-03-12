@@ -1,6 +1,5 @@
 package basar.web;
 
-import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.regex.Matcher;
@@ -142,22 +141,11 @@ public class CashPointController {
 	}
 	
 	public void validatePreis(FacesContext context, UIComponent component, Object value){
-		String str = (String) value;
-		
-		Pattern p = Pattern.compile("[+]?[0-9]+");
-		Matcher m = p.matcher(str.replace(",", ""));
-		if(!m.matches()){
-			throw new ValidatorException(new FacesMessage("Der Preis :"+str +" ist kein gültiger Geldbetrag"));
-		}
-		
-		if(str.contains(",")){
-		 String komma = str.substring(str.indexOf(',')+1);
-		 if(komma.length() > 2){
-		   throw new ValidatorException(new FacesMessage("Der Preis :"+str +" ist kein gültiger Geldbetrag zu viele Kommastellen"));
-		 }
-		 if(!komma.equals("00") && !komma.equals("50") && !komma.equals("0") && !komma.equals("5")){
-			 throw new ValidatorException(new FacesMessage("Der Preis :"+str +" ist kein gültiger Geldbetrag"));
-		 }
+		String price = (String) value;
+		try {
+			PriceValidator.validatePrice(price);
+		} catch (NotValidPriceException e) {
+			throw new ValidatorException(new FacesMessage(e.getMessage()));
 		}
 	}
 	
