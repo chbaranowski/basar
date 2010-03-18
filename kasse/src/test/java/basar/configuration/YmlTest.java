@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.InputStream;
 import java.net.URL;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.yaml.snakeyaml.JavaBeanLoader;
 import org.yaml.snakeyaml.TypeDescription;
@@ -14,6 +15,7 @@ import basar.config.Configuration;
 import basar.config.Database;
 import basar.config.Kasse;
 
+@Ignore
 public class YmlTest {
 
 

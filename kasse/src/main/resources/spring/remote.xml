@@ -15,7 +15,7 @@
 					<bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
 						<property name="httpClient">
 							<bean class="org.apache.commons.httpclient.HttpClient">
-								<property name="connectionTimeout" value="250" />
+								<property name="connectionTimeout" value="2500" />
 							</bean>
 						</property>
 					</bean>		
@@ -34,7 +34,7 @@
 					<bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
 						<property name="httpClient">
 							<bean class="org.apache.commons.httpclient.HttpClient">
-								<property name="connectionTimeout" value="250" />
+								<property name="connectionTimeout" value="2500" />
 							</bean>
 						</property>
 					</bean>		

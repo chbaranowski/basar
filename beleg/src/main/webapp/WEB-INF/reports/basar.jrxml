@@ -34,23 +34,23 @@
 		<band height="170" splitType="Stretch">
 			<subreport>
 				<reportElement x="0" y="128" width="466" height="41"/>
-				<subreportParameter name="XML_TIME_ZONE">
-					<subreportParameterExpression><![CDATA[$P{XML_TIME_ZONE}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="XML_LOCALE">
-					<subreportParameterExpression><![CDATA[$P{XML_LOCALE}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="basarNumber">
-					<subreportParameterExpression><![CDATA[$F{basarNummer}]]></subreportParameterExpression>
+				<subreportParameter name="XML_DATE_PATTERN">
+					<subreportParameterExpression><![CDATA[$P{XML_DATE_PATTERN}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="XML_DATA_DOCUMENT">
 					<subreportParameterExpression><![CDATA[$P{XML_DATA_DOCUMENT}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="XML_DATE_PATTERN">
-					<subreportParameterExpression><![CDATA[$P{XML_DATE_PATTERN}]]></subreportParameterExpression>
+				<subreportParameter name="XML_LOCALE">
+					<subreportParameterExpression><![CDATA[$P{XML_LOCALE}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="XML_NUMBER_PATTERN">
 					<subreportParameterExpression><![CDATA[$P{XML_NUMBER_PATTERN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="basarNumber">
+					<subreportParameterExpression><![CDATA[$F{basarNummer}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="XML_TIME_ZONE">
+					<subreportParameterExpression><![CDATA[$P{XML_TIME_ZONE}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportExpression class="java.lang.String"><![CDATA["position.jasper"]]></subreportExpression>
 			</subreport>
@@ -94,7 +94,7 @@
 				<textElement>
 					<font fontName="Verdana" size="18"/>
 				</textElement>
-				<text><![CDATA[Kleiderbasar Grunschule Gültstein - 2009]]></text>
+				<text><![CDATA[Kleiderbasar Waldorf-Kindergarten - 2010]]></text>
 			</staticText>
 		</band>
 		<band height="150">
@@ -189,7 +189,7 @@
 				<textElement>
 					<font fontName="Verdana" size="12"/>
 				</textElement>
-				<text><![CDATA[Kleiderbasar Waldorf-Kindergarten Konstanz - 2009]]></text>
+				<text><![CDATA[Kleiderbasar Waldorf-Kindergarten Konstanz - 2010]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

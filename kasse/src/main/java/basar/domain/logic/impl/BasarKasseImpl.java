@@ -64,31 +64,31 @@ public class BasarKasseImpl implements BasarKasseFacade {
 
 	public Seller getSeller(long basarNumber) {
 		Seller seller = sellerDao.getSeller(basarNumber);
-		try
-		{
-		if(seller == null){
-			for (CashpointRemoteClient client : remoteCashpoints) {
-				try
-				{
-				CashpointRemoteService service = client.getService();
-				if(service != null){
-					Seller remote = service.getSeller(basarNumber);
-					if(remote != null){
-						sellerDao.insertSeller(remote);
-						return remote;
-					}
-				}
-				}
-				catch(Exception e){
-					System.out.println("Remote Kasse nicht erreicht");
-					System.out.println(e);
-				}
-			}
-		}
-		}
-		catch(Exception e){
-			System.out.println(e);
-		}
+//		try
+//		{
+//		if(seller == null){
+//			for (CashpointRemoteClient client : remoteCashpoints) {
+//				try
+//				{
+//				CashpointRemoteService service = client.getService();
+//				if(service != null){
+//					Seller remote = service.getSeller(basarNumber);
+//					if(remote != null){
+//						sellerDao.insertSeller(remote);
+//						return remote;
+//					}
+//				}
+//				}
+//				catch(Exception e){
+//					System.out.println("Remote Kasse nicht erreicht");
+//					System.out.println(e);
+//				}
+//			}
+//		}
+//		}
+//		catch(Exception e){
+//			System.out.println(e);
+//		}
 		return seller;
 	}
 
@@ -108,21 +108,26 @@ public class BasarKasseImpl implements BasarKasseFacade {
 		return saleService.isValideBasarNumber(number);
 	}
 
-	public void purchase(Sale sale) {
+	public void purchase(final Sale sale) {
 		saleService.purchase(sale);
-		for (CashpointRemoteClient client : remoteCashpoints) {
-			try{
-				CashpointRemoteService service = client.getService();
-				if(service != null){
-					service.purchase(sale);
+		Thread thread = new Thread(new Runnable() {
+			public void run() {
+				for (CashpointRemoteClient client : remoteCashpoints) {
+					try{
+						CashpointRemoteService service = client.getService();
+						if(service != null){
+							service.purchase(sale);
+						}
+					}
+					catch(Exception exp)
+					{
+						System.out.println("Remote Kasse nicht erreicht");
+						System.out.println(exp);
+					}
 				}
 			}
-			catch(Exception exp)
-			{
-				System.out.println("Remote Kasse nicht erreicht");
-				System.out.println(exp);
-			}
-		}
+		});
+		thread.start();
 	}
 
 	public List<Document> getDocumentList() {

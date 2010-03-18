@@ -5,6 +5,10 @@
 
 	<description>kasse</description>
 
+	<welcome-file-list>
+		<welcome-file>Cashpoint.html</welcome-file>
+	</welcome-file-list>
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -38,8 +42,7 @@
 
 	<servlet>
 		<servlet-name>cashpointRemoteServiceExporter</servlet-name>
-		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet
-		</servlet-class>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -49,8 +52,7 @@
 
 	<servlet>
 		<servlet-name>Jersey</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer
-		</servlet-class>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
 			<param-value>basar.rest</param-value>
@@ -64,13 +66,11 @@
 	</servlet-mapping>
 
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
 </web-app>

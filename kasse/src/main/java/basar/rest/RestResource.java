@@ -54,6 +54,16 @@ public class RestResource extends SpringBeanAutowiringSupport {
 		return saleResponse;
 	}
 	
+	@POST
+	@Path("/info")
+	@Produces(MediaType.APPLICATION_JSON)
+	public SaleResponse info() {
+		SaleResponse saleResponse = new SaleResponse();
+		saleResponse.setGewinn(basarKasse.getGewinn());
+		saleResponse.setUmsatz(basarKasse.getUmsatz());
+		return saleResponse;
+	}
+	
 	
 
 }

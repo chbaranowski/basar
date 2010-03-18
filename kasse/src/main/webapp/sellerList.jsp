@@ -11,7 +11,7 @@
 <f:view>
 	<h:form id="sellers">
 		
-		<p><h:commandLink value="Kasse" action="Kasse" /></p>
+		<p><a href="/kasse/">Kasse</a></p>
 	    <p><h1>Verwaltung der Verkäufer</h1></p>
 	    
 	    <p><h:messages /></p>
