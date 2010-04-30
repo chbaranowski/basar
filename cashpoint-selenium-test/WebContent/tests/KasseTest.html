@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>KasseTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">KasseTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>kasse/rest/v1/clear</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>kasse</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Verkäufer Verwalten</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>sellers:newSeller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>seller:basarNummer</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>seller:name</td>
+	<td>Tester Christian</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>seller:save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kasse</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@type='text']</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='cashPointForm']/table/tbody/tr[4]/td/input</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='cashPointForm']/table/tbody/tr[6]/td/input</td>
+	<td>Hose</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='cashPointBill']/table/tbody/tr[2]/td[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='cashPointBill']/table/tbody/tr[2]/td[1]</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='cashPointBill']/table/tbody/tr[2]/td[2]</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='cashPointBill']/table/tbody/tr[2]/td[3]</td>
+	<td>Hose</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='cashPointAmount']/table/tbody/tr[2]/td/div</td>
+	<td>22</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@type='text']</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='cashPointForm']/table/tbody/tr[4]/td/input</td>
+	<td>2,5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[@id='cashPointForm']/table/tbody/tr[6]/td/input</td>
+	<td>Kleid</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='cashPointBill']/table/tbody/tr[3]/td[1]</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='cashPointAmount']/table/tbody/tr[2]/td/div</td>
+	<td>24,5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='cashPointToolBar']/table/tbody/tr/td/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='cashPointAmount']/table/tbody/tr[2]/td/div</td>
+	<td>0,0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='Gewinn']/table/tbody/tr[2]/td/div</td>
+	<td>4,90</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='Umsatz']/table/tbody/tr[2]/td/div</td>
+	<td>24,50</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

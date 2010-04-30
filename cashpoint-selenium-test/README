@@ -1,0 +1,14 @@
+#
+# Selenium core example test for the basar application (see http://github.com/tux2323/basar) 
+# 
+
+# Step 1: Start the basar application in your favorite web server (e.g. apache tomcat, eclipse jetty)
+ 
+# Step 2: Start the Selenium Webapp also in the same web server
+
+# Step 3: Call the follow URL with your favorite browser 
+# Replace http://localhost:8080/ with your host name and port
+# (The example selenium test works with Firefox and Safari)
+http://localhost:9080/cashpoint-selenium-test/core/TestRunner.html?test=../tests/TestSuite.html&baseUrl=http://localhost:9080/
+
+# Step 4: Run the test click on the green button ...
