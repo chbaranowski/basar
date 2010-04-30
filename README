@@ -1,0 +1,15 @@
+# Example cashpoint application for a basar.
+#
+# For a OSGi based cashpoint variante see http://github.com/tux2323/osgi-kasse-example 
+
+# beleg
+# App for create a PDF bill
+
+# cashpoint 
+# GWT cashpoint only view 
+
+# kasse 
+# business logic and JSF cashpoint view (is used be the GWT app via REST)
+
+# cashpoint-selenium-test
+# A example selenium core test (not selenium RC based)
