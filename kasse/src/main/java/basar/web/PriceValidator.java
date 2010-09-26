@@ -10,16 +10,16 @@ public class PriceValidator {
 		Pattern p = Pattern.compile("[+]?[0-9]+");
 		Matcher m = p.matcher(price.replace(",", ""));
 		if(!m.matches()){
-			throw new NotValidPriceException("Der Preis :"+price +" ist kein gültiger Geldbetrag");
+			throw new NotValidPriceException("Der Preis :"+price +" ist kein g√ºltiger Geldbetrag");
 		}
 		
 		if(price.contains(",")){
 		 String komma = price.substring(price.indexOf(',')+1);
 		 if(komma.length() > 2){
-		   throw new NotValidPriceException("Der Preis :"+price +" ist kein gültiger Geldbetrag zu viele Kommastellen");
+		   throw new NotValidPriceException("Der Preis :"+price +" ist kein g√ºltiger Geldbetrag zu viele Kommastellen");
 		 }
 		 if(!komma.equals("00") && !komma.equals("50") && !komma.equals("0") && !komma.equals("5")){
-			 throw new NotValidPriceException("Der Preis :"+price +" ist kein gültiger Geldbetrag");
+			 throw new NotValidPriceException("Der Preis :"+price +" ist kein g√ºltiger Geldbetrag");
 		 }
 		}
 	}

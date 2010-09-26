@@ -64,7 +64,7 @@ public class SaleServiceImpl implements SaleService {
 				PositionKey key = positionDao.createPositionKey();
 				position.setPositionKey(key);
 			}
-			position.setType(PositionType.STORNO);
+			position.setPositionType(PositionType.STORNO);
 			position.setCreateTime(new Date());
 			positionDao.insertPosition(position);
 		}

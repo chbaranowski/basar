@@ -66,7 +66,7 @@ public class PositionController {
 		Position position = new Position();
 		position.setPrice(priceLong);
 		position.setSeller(seller);
-		position.setType(PositionType.STORNO);
+		position.setPositionType(PositionType.STORNO);
 		position.setDescription("STORNO");
 		
 		sale.addPosition(position);
@@ -90,12 +90,12 @@ public class PositionController {
 		Pattern p = Pattern.compile("[+]?[0-9]+");
 		Matcher m = p.matcher(((String) value));
 		if(!m.matches()){
-			throw new ValidatorException(new FacesMessage("Keine g웞tige Basarnummer"));
+			throw new ValidatorException(new FacesMessage("Keine g체ltige Basarnummer"));
 		}
 		Long basarNumber = Long.valueOf((String) value);
 		Seller seller = basarKasse.getSeller(basarNumber);
 		if(seller == null){
-			throw new ValidatorException(new FacesMessage("Verk둼fer mit der Basar Nummer: "+basarNumber+" nicht gefunden!"));
+			throw new ValidatorException(new FacesMessage("Verk채ufer mit der Basar Nummer: "+basarNumber+" nicht gefunden!"));
 		}
 	}
 	
@@ -105,16 +105,16 @@ public class PositionController {
 		Pattern p = Pattern.compile("[+]?[0-9]+");
 		Matcher m = p.matcher(str.replace(",", ""));
 		if(!m.matches()){
-			throw new ValidatorException(new FacesMessage("Der Preis :"+str +" ist kein g웞tiger Geldbetrag"));
+			throw new ValidatorException(new FacesMessage("Der Preis :"+str +" ist kein g체ltiger Geldbetrag"));
 		}
 		
 		if(str.contains(",")){
 		 String komma = str.substring(str.indexOf(',')+1);
 		 if(komma.length() > 2){
-		   throw new ValidatorException(new FacesMessage("Der Preis :"+str +" ist kein g웞tiger Geldbetrag zu viele Kommastellen"));
+		   throw new ValidatorException(new FacesMessage("Der Preis :"+str +" ist kein g체ltiger Geldbetrag zu viele Kommastellen"));
 		 }
 		 if(!komma.equals("00") && !komma.equals("50") && !komma.equals("0") && !komma.equals("5")){
-			 throw new ValidatorException(new FacesMessage("Der Preis :"+str +" ist kein g웞tiger Geldbetrag"));
+			 throw new ValidatorException(new FacesMessage("Der Preis :"+str +" ist kein g체ltiger Geldbetrag"));
 		 }
 		}
 	}

@@ -42,9 +42,8 @@ public class SellerDaoTest extends DatabaseTest {
 	@Test
 	public void testGetSeller() throws Exception {
 		Seller seller = sellerDao.getSeller(100);
-		
 		assertNotNull(seller);
-		assertEquals(Long.valueOf(100), seller.getBasarNumber());
+		assertEquals(100, seller.getBasarNumber());
 		assertEquals("Test Kunde", seller.getName());
 		assertEquals(2, seller.getPositions().size());
 	}

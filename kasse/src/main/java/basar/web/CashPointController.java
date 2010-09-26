@@ -131,12 +131,12 @@ public class CashPointController {
 		Pattern p = Pattern.compile("[+]?[0-9]+");
 		Matcher m = p.matcher(((String) value));
 		if(!m.matches()){
-			throw new ValidatorException(new FacesMessage("Keine gültige Basarnummer"));
+			throw new ValidatorException(new FacesMessage("Keine g√ºltige Basarnummer"));
 		}
 		Long basarNumber = Long.valueOf((String) value);
 		Seller seller = basarKasse.getSeller(basarNumber);
 		if(seller == null){
-			throw new ValidatorException(new FacesMessage("Verkäufer mit der Basar Nummer: "+basarNumber+" nicht gefunden!"));
+			throw new ValidatorException(new FacesMessage("Verk√§ufer mit der Basar Nummer: "+basarNumber+" nicht gefunden!"));
 		}
 	}
 	

@@ -168,7 +168,7 @@ public class BasarKasseImpl implements BasarKasseFacade {
 		long umsatz = 0;
 		List<Position> positionList = positionDao.getPositionList();
 		for (Position position : positionList) {
-			if(position.getType().equals(PositionType.SALE))
+			if(position.getPositionType().equals(PositionType.SALE))
 				umsatz += position.getPrice();
 			else
 				umsatz -= position.getPrice();
