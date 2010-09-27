@@ -8,6 +8,6 @@ class Configuration {
 	var kasseName = ""
 		
 	@BeanProperty
-	var prozent = 0;
+	var prozent = 0
 
 }

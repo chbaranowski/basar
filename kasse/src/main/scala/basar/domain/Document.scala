@@ -24,7 +24,7 @@ class Document extends Serializable {
   var rate = ""
 
   @BeanProperty
-  var procceeds = ""
+  var proceeds = ""
 
   @BeanProperty
   var prozent: String = null
