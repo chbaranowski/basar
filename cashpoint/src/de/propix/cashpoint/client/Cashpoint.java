@@ -65,7 +65,6 @@ public class Cashpoint implements EntryPoint {
 	final Button addButton = new Button("Hinzu");
 
 	public void onModuleLoad() {
-
 		VerticalPanel cashPointFormPanel = new VerticalPanel();
 
 		cashPointFormPanel.add(new Label("Basar Nummer:"));
