@@ -65,6 +65,7 @@ public class Cashpoint implements EntryPoint {
 	final Button addButton = new Button("Hinzu");
 
 	public void onModuleLoad() {
+
 		VerticalPanel cashPointFormPanel = new VerticalPanel();
 
 		cashPointFormPanel.add(new Label("Basar Nummer:"));
@@ -312,6 +313,7 @@ public class Cashpoint implements EntryPoint {
 						isBasarNumberValid = true;
 					} else {
 						basarNumberTextBox.setStyleName("error");
+						basarNumberTextBox.setFocus(true);
 						isBasarNumberValid = false;
 					}
 					command.execute();
@@ -339,12 +341,11 @@ public class Cashpoint implements EntryPoint {
 					String description = descriptionTextBox.getText();
 					Button removePostionButton = new Button("X");
 
-					int rowCount = billTable.getRowCount();
-
-					billTable.setText(rowCount, 0, basarNumber);
-					billTable.setText(rowCount, 1, amount);
-					billTable.setText(rowCount, 2, description);
-					billTable.setWidget(rowCount, 3, removePostionButton);
+					billTable.insertRow(1);
+					billTable.setText(1, 0, basarNumber);
+					billTable.setText(1, 1, amount);
+					billTable.setText(1, 2, description);
+					billTable.setWidget(1, 3, removePostionButton);
 					removePostionButton.addClickHandler(new ClickHandler() {
 
 						@Override
