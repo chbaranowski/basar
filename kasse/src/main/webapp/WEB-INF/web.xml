@@ -12,10 +12,10 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:spring/dao.xml;
-			classpath:spring/remote.xml;
-			classpath:spring/service.xml
-	  		</param-value>
+			classpath:spring/core-context.xml;
+			classpath:spring/remote-context.xml;
+			classpath:spring/service-context.xml
+	  	</param-value>
 	</context-param>
 
 	<servlet>

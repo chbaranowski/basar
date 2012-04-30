@@ -22,7 +22,7 @@ import basar.domain.logic.impl.BasarKasseImpl;
 import basar.remote.CashpointRemoteService;
 import basar.remoteclient.CashpointRemoteClient;
 
-@ContextConfiguration(locations={"/spring/dao.xml", "/spring/remote.xml"})
+@ContextConfiguration(locations={"/spring/core-context.xml", "/spring/remote-context.xml"})
 public class BasarKasseFacadeTest extends DatabaseTest {
 	
 	@Autowired
@@ -61,6 +61,7 @@ public class BasarKasseFacadeTest extends DatabaseTest {
 		
 		
 		kasse.purchase(sale);
+		System.out.println("");
 	}
 	
 	@Test

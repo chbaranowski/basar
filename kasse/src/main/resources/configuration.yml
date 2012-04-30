@@ -4,6 +4,7 @@
 database:
   username: root
   password: test
+
 # 
 # cash point Configuration
 #

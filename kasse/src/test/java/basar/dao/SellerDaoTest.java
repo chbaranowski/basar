@@ -11,7 +11,7 @@ import org.springframework.test.jdbc.SimpleJdbcTestUtils;
 
 import basar.domain.Seller;
 
-@ContextConfiguration(locations={"/spring/dao.xml", "/spring/remote.xml"})
+@ContextConfiguration(locations={"/spring/core-context.xml", "/spring/remote-context.xml"})
 public class SellerDaoTest extends DatabaseTest {
 
 	@Autowired

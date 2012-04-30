@@ -13,7 +13,7 @@ import basar.domain.Position;
 import basar.domain.Sale;
 import basar.domain.Seller;
 
-@ContextConfiguration(locations={"/spring/dao.xml", "/spring/remote.xml"})
+@ContextConfiguration(locations={"/spring/core-context.xml", "/spring/remote-context.xml"})
 public class SaleServiceTest extends DatabaseTest {
 
 	@Autowired
@@ -57,17 +57,14 @@ public class SaleServiceTest extends DatabaseTest {
 		assertEquals(0, countRowsInPositionTable);	
 	}
 	
-	
 	@Test
 	public void testIsValideBasarNumber() {
 		assertTrue(saleService.isValideBasarNumber(100));
 	}
-	
 
 	@Test
 	public void testIsValideBasarNumber_NonValidNumber() {
 		assertFalse(saleService.isValideBasarNumber(1001));
 	}
-	
 
 }
