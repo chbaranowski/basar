@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import basar.dao.PositionDao;
@@ -120,6 +121,7 @@ public class BasarKasseImpl implements BasarKasseFacade {
 		saleService.storno(sale);
 	}
 
+	@Cacheable("positions")
 	public Position getPosition(PositionKey positionKey) {
 		return positionDao.getPosition(positionKey);
 	}
