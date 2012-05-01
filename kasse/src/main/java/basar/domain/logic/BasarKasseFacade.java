@@ -41,5 +41,7 @@ public interface BasarKasseFacade {
 	String getUmsatz();
 	
 	String getGewinn();
+	
+	PositionKey createPositionKey();
 
 }

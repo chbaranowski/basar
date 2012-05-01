@@ -2,8 +2,11 @@ package basar.domain.logic.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,11 @@ import basar.domain.logic.BasarKasseFacade;
 import basar.domain.logic.DocumentService;
 import basar.domain.logic.SaleService;
 
+import com.google.common.base.Optional;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+
 @Service("basarKasse")
 public class BasarKasseImpl implements BasarKasseFacade {
 
@@ -33,6 +41,15 @@ public class BasarKasseImpl implements BasarKasseFacade {
 	private TreasuryBalanceTransformer transformer;
 
 	private CashpointRemoteDispatcher cashpointRemoteDispatcher;
+
+//	private LoadingCache<PositionKey, Position> positionCache = CacheBuilder
+//			.newBuilder().maximumSize(10).expireAfterWrite(1, TimeUnit.MINUTES)
+//			.build(new CacheLoader<PositionKey, Position>() {
+//				@Override
+//				public Position load(PositionKey key) throws Exception {
+//					return positionDao.getPosition(key);
+//				}
+//			});
 
 	@Autowired
 	public void setCashpointRemoteDispatcher(
@@ -72,8 +89,10 @@ public class BasarKasseImpl implements BasarKasseFacade {
 	public Seller getSeller(long basarNumber) {
 		Seller seller = sellerDao.getSeller(basarNumber);
 		if (seller == null) {
-			seller = cashpointRemoteDispatcher.findSellerBy(basarNumber);
-			if (seller != null) {
+			Optional<Seller> remoteSeller = cashpointRemoteDispatcher
+					.findSellerBy(basarNumber);
+			if (remoteSeller.isPresent()) {
+				seller = remoteSeller.get();
 				sellerDao.insertSeller(seller);
 			}
 		}
@@ -109,6 +128,7 @@ public class BasarKasseImpl implements BasarKasseFacade {
 		return positionDao.getPositionList();
 	}
 
+	@CacheEvict(value = "positions", key = "#position.positionKey")
 	public void deletePosition(Position position) {
 		positionDao.deletePosition(position);
 	}
@@ -121,8 +141,14 @@ public class BasarKasseImpl implements BasarKasseFacade {
 		saleService.storno(sale);
 	}
 
-	@Cacheable("positions")
+	@Cacheable(value = "positions", key = "#positionKey")
 	public Position getPosition(PositionKey positionKey) {
+//		try {
+//			return positionCache.get(positionKey);
+//		} catch (ExecutionException e) {
+//			e.printStackTrace();
+//			throw new IllegalStateException();
+//		}
 		return positionDao.getPosition(positionKey);
 	}
 
@@ -166,6 +192,10 @@ public class BasarKasseImpl implements BasarKasseFacade {
 		BigDecimal prozent = new BigDecimal(umsatz).divide(new BigDecimal(100));
 		long gewinn = Math.round(prozent.doubleValue() * 20);
 		return formatUmsatz(gewinn);
+	}
+
+	public PositionKey createPositionKey() {
+		return positionDao.createPositionKey();
 	}
 
 }

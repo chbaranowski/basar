@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.base.Optional;
+
 import basar.domain.Seller;
 import basar.remote.CashpointRemoteService;
 import basar.remoteclient.CashpointRemoteClient;
@@ -19,7 +21,7 @@ public class CashpointRemoteDispatcher {
 		this.remoteCashpoints = remoteCashpoints;
 	}
 
-	public Seller findSellerBy(long basarNumber) {
+	public Optional<Seller> findSellerBy(long basarNumber) {
 		Seller remote = null;
 		for (CashpointRemoteClient client : remoteCashpoints) {
 			try {
@@ -35,7 +37,7 @@ public class CashpointRemoteDispatcher {
 				System.out.println(e);
 			}
 		}
-		return remote;
+		return Optional.of(remote);
 	}
 
 }
