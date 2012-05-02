@@ -7,7 +7,7 @@
 	<artifactId>kasse</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1</version>
-	
+
 	<properties>
 		<spring.version>3.1.1.RELEASE</spring.version>
 	</properties>
@@ -118,17 +118,17 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>3.3.2.GA</version>
+			<version>4.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-annotations</artifactId>
-			<version>3.4.0.GA</version>
+			<version>3.5.6-Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.4.0.GA</version>
+			<version>4.1.2</version>
 		</dependency>
 
 		<dependency>
@@ -229,12 +229,12 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.5.11</version>
+			<version>1.6.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.11</version>
+			<version>1.6.4</version>
 		</dependency>
 
 		<dependency>
@@ -248,11 +248,17 @@
 			<artifactId>jaxb-impl</artifactId>
 			<version>2.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>12.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.0.3.RELEASE</version>
 		</dependency>
 
 	</dependencies>

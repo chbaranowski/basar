@@ -14,9 +14,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.google.common.base.Objects;
+
 @Entity
 @XmlRootElement
 public class Seller implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Long basarNumber;
 	
@@ -64,5 +68,13 @@ public class Seller implements Serializable {
 				summe -= position.getPrice();
 		}
 		return summe;
+	}
+	
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+	       .add("name", name)
+	       .add("basarNumber", basarNumber)
+	       .toString();
 	}
 }
