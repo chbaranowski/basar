@@ -1,9 +1,5 @@
 package basar.domain.logic;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.reset;
-import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -11,7 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 
 import basar.dao.DatabaseTest;
@@ -19,8 +14,6 @@ import basar.domain.Position;
 import basar.domain.Sale;
 import basar.domain.Seller;
 import basar.domain.logic.impl.BasarKasseImpl;
-import basar.remote.CashpointRemoteService;
-import basar.remoteclient.CashpointRemoteClient;
 
 @ContextConfiguration(locations={"/spring/core-context.xml", "/spring/remote-context.xml"})
 public class BasarKasseFacadeTest extends DatabaseTest {

@@ -1,7 +1,5 @@
 package basar.web;
 
-import static org.junit.Assert.*;
-
 import javax.faces.validator.ValidatorException;
 
 import org.junit.Test;
