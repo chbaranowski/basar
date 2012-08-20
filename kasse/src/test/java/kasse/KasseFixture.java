@@ -7,7 +7,7 @@ import basar.domain.Seller;
 import basar.domain.logic.BasarKasseFacade;
 import fit.Fixture;
 
-public class KasseFixture extends Fixture{
+public class KasseFixture extends Fixture {
 	
 	BasarKasseFacade basarKasse = KasseHolder.INSTANCE.getKasse();
 	
