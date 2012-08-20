@@ -1,4 +1,4 @@
-package kasse;
+package basar.fit;
 
 import java.util.ArrayList;
 import java.util.List;
