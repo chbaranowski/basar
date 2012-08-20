@@ -1,4 +1,4 @@
-package kasse;
+package basar.fit;
 
 import static org.junit.Assert.*;
 

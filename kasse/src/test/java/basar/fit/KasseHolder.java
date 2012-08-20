@@ -1,4 +1,4 @@
-package kasse;
+package basar.fit;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
