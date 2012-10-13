@@ -6,6 +6,8 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.http.client.Request;
@@ -22,14 +24,16 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.HTMLTable.Cell;
 
 public class Cashpoint implements EntryPoint {
+	
+	static final String SERVICE_URL = "/kasse";
 
 	final TextBox basarNumberTextBox = new TextBox();
 
@@ -41,7 +45,10 @@ public class Cashpoint implements EntryPoint {
 
 		@Override
 		public void onKeyPress(KeyPressEvent event) {
-			if (event.getCharCode() == KeyCodes.KEY_ENTER) {
+			if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
+				addPositionToBill();
+			}
+			else if (event.getCharCode() == KeyCodes.KEY_ENTER) {
 				addPositionToBill();
 			}
 		}
@@ -71,6 +78,13 @@ public class Cashpoint implements EntryPoint {
 		cashPointFormPanel.add(new Label("Basar Nummer:"));
 		cashPointFormPanel.add(basarNumberTextBox);
 		basarNumberTextBox.addKeyPressHandler(addBillKeyPressHandler);
+		basarNumberTextBox.addKeyDownHandler(new KeyDownHandler() {
+			
+			@Override
+			public void onKeyDown(KeyDownEvent event) {
+				System.out.println("");
+			}
+		});
 		basarNumberTextBox.setStyleName("valid");
 		basarNumberTextBox.addChangeHandler(new ChangeHandler() {
 
@@ -125,15 +139,9 @@ public class Cashpoint implements EntryPoint {
 		RootPanel.get("cashPointToolBar").add(buttonPanel);
 		RootPanel.get("cashPointAmount").add(amountPanel);
 		
-		VerticalPanel gewinnPanel = new VerticalPanel();
-		gewinnPanel.add(new Label("Gewinn: "));
-		gewinnPanel.add(gewinnLabel);
-		RootPanel.get("Gewinn").add(gewinnPanel);
+		RootPanel.get("Gewinn").add(gewinnLabel);
 		
-		VerticalPanel umsatzPanel = new VerticalPanel();
-		umsatzPanel.add(new Label("Umsatz: "));
-		umsatzPanel.add(umsatzLabel);
-		RootPanel.get("Umsatz").add(umsatzPanel);
+		RootPanel.get("Umsatz").add(umsatzLabel);
 		
 		dialogBox.setAnimationEnabled(true);
 		dialogBox.setGlassEnabled(true);
@@ -173,7 +181,7 @@ public class Cashpoint implements EntryPoint {
 				dialogBox.center();
 
 				RequestBuilder builder = new RequestBuilder(
-						RequestBuilder.POST, "/kasse/rest/v1/purchase");
+						RequestBuilder.POST, SERVICE_URL + "/rest/v1/purchase");
 
 				JSONObject purchaseRequest = new JSONObject();
 				JSONArray positions = new JSONArray();
@@ -229,7 +237,7 @@ public class Cashpoint implements EntryPoint {
 		});
 		
 		RequestBuilder builder = new RequestBuilder(
-				RequestBuilder.POST, "/kasse/rest/v1/info");
+				RequestBuilder.POST, SERVICE_URL + "/rest/v1/info");
 		try {
 			builder.setHeader("Content-Type", "application/json");
 
@@ -269,12 +277,15 @@ public class Cashpoint implements EntryPoint {
 		if (amount.trim().length() == 0) {
 			amountTextBox.setStyleName("error");
 			return false;
-		} else {
-			
+		} else if(amount.trim().equals(",")){
+			amountTextBox.setStyleName("error");
+			return false;
+		}
+		else {
 			int kommaIndex = amount.indexOf(',');
-			if(kommaIndex <= 0)
+			if(kommaIndex < 0)
 				kommaIndex = amount.indexOf('.');
-			if(kommaIndex > 0){
+			if(kommaIndex >= 0){
 				String str = amount.substring(kommaIndex+1, amount.length());
 				if(str.equals("50") || str.equals("00") || str.equals("0") || str.equals("5")){
 					amountTextBox.setStyleName("valid");
@@ -286,8 +297,6 @@ public class Cashpoint implements EntryPoint {
 				amountTextBox.setStyleName("valid");
 				return true;
 			}
-				
-			
 			amountTextBox.setStyleName("error");
 			return false;
 		}
@@ -298,7 +307,8 @@ public class Cashpoint implements EntryPoint {
 	boolean isBasarNumberValid = false;
 
 	protected void validateBasarNumber() {
-		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, "/kasse/rest/v1/seller/"+ basarNumberTextBox.getText());
+		String url = com.google.gwt.http.client.URL.encode(SERVICE_URL + "/rest/v1/seller/"+ basarNumberTextBox.getText());
+		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 		try {
 			builder.sendRequest(null, new RequestCallback() {
 

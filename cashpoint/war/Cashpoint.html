@@ -37,9 +37,15 @@
 
     <!-- OPTIONAL: include this if you want history support -->
     <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
-		<div id="Gewinn"></div>
-        <div id="Umsatz"></div>
 		
+		<table>
+			<tr>
+				<td>Umsatz: <span id="Umsatz" /></td>
+				<td>Gewinn: <span id="Gewinn"/></td>
+			</tr>
+		</table>
+		
+		<hr />
 		<div id="cashPoint">
 	    <div id="cashPointForm"></div>
 	    <div id="cashPointAmount"></div>
@@ -47,7 +53,8 @@
 	    <div id="cashPointBill"></div>
 	   
 		<p>&nbsp;</p>
-	   
+	    <hr />
+		
         <p><a href="sellerList.jsf">Verkäufer Verwalten</a></p>
 		<p><a href="http://localhost:8080/beleg/abrechung.pdf?report=basar">Abrechnung</a></p>
 		<p><a href="http://localhost:8080/beleg/uebersicht.pdf?report=uebersicht">Abrechnung - Übersicht</a></p>
