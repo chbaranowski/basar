@@ -70,6 +70,11 @@ public class Cashpoint implements EntryPoint {
 	final Label umsatzLabel = new Label("0,00");
 	
 	final Button addButton = new Button("Hinzu");
+	
+	final Button cent50Button = new Button("0,50");
+	final Button cent150Button = new Button("1,50");
+	final Button cent250Button = new Button("2,50");
+	
 
 	public void onModuleLoad() {
 
@@ -96,7 +101,8 @@ public class Cashpoint implements EntryPoint {
 		});
 
 		cashPointFormPanel.add(new Label("Betrag:"));
-		cashPointFormPanel.add(amountTextBox);
+		HorizontalPanel amountInputPanel = new HorizontalPanel();
+		cashPointFormPanel.add(amountInputPanel);
 		amountTextBox.addKeyPressHandler(addBillKeyPressHandler);
 		amountTextBox.addChangeHandler(new ChangeHandler() {
 
@@ -108,7 +114,32 @@ public class Cashpoint implements EntryPoint {
 		});
 		amountTextBox.setText("1,00");
 		amountTextBox.setStyleName("valid");
-
+		amountInputPanel.add(amountTextBox);
+		amountInputPanel.add(cent50Button);
+		cent50Button.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				amountTextBox.setText("0,50");
+				amountTextBox.setFocus(true);
+			}
+		});
+		amountInputPanel.add(cent150Button);
+		cent150Button.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				amountTextBox.setText("1,50");
+				amountTextBox.setFocus(true);
+			}
+		});
+		amountInputPanel.add(cent250Button);
+		cent250Button.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				amountTextBox.setText("2,50");
+				amountTextBox.setFocus(true);
+			}
+		});
+		
 		cashPointFormPanel.add(new Label("Beschreibung"));
 		cashPointFormPanel.add(descriptionTextBox);
 		descriptionTextBox.addKeyPressHandler(addBillKeyPressHandler);
