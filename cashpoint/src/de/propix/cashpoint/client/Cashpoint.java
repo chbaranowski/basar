@@ -83,13 +83,6 @@ public class Cashpoint implements EntryPoint {
 		cashPointFormPanel.add(new Label("Basar Nummer:"));
 		cashPointFormPanel.add(basarNumberTextBox);
 		basarNumberTextBox.addKeyPressHandler(addBillKeyPressHandler);
-		basarNumberTextBox.addKeyDownHandler(new KeyDownHandler() {
-			
-			@Override
-			public void onKeyDown(KeyDownEvent event) {
-				System.out.println("");
-			}
-		});
 		basarNumberTextBox.setStyleName("valid");
 		basarNumberTextBox.addChangeHandler(new ChangeHandler() {
 
@@ -254,6 +247,7 @@ public class Cashpoint implements EntryPoint {
 										umsatzLabel.setText(jsonResponse.get("umsatz").isString().stringValue());
 										
 										dialogBox.hide();
+										basarNumberTextBox.setFocus(true);
 									} else {
 										dialogBox
 												.setText("Es ist ein Fehler beim speichern aufgetretten !!!");
