@@ -99,7 +99,9 @@ public class Cashpoint implements EntryPoint {
 
 			@Override
 			public void onChange(ChangeEvent event) {
-				validateAmount();
+				if(!validateAmount()){
+					amountTextBox.setFocus(true);
+				}
 			}
 
 		});
