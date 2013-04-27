@@ -18,6 +18,7 @@ import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -30,7 +31,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Cashpoint implements EntryPoint {
-	
+
 	static final String SERVICE_URL = "/kasse";
 
 	final TextBox basarNumberTextBox = new TextBox();
@@ -45,8 +46,7 @@ public class Cashpoint implements EntryPoint {
 		public void onKeyPress(KeyPressEvent event) {
 			if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
 				addPositionToBill();
-			}
-			else if (event.getCharCode() == KeyCodes.KEY_ENTER) {
+			} else if (event.getCharCode() == KeyCodes.KEY_ENTER) {
 				addPositionToBill();
 			}
 		}
@@ -62,17 +62,16 @@ public class Cashpoint implements EntryPoint {
 	final DialogBox dialogBox = new DialogBox();
 
 	final Button closeDialogButton = new Button("Schliesen");
-	
+
 	final Label gewinnLabel = new Label("0,00");
-	
+
 	final Label umsatzLabel = new Label("0,00");
-	
+
 	final Button addButton = new Button("Hinzu");
-	
+
 	final Button cent50Button = new Button("0,50");
 	final Button cent150Button = new Button("1,50");
 	final Button cent250Button = new Button("2,50");
-	
 
 	public void onModuleLoad() {
 
@@ -99,7 +98,7 @@ public class Cashpoint implements EntryPoint {
 
 			@Override
 			public void onChange(ChangeEvent event) {
-				if(!validateAmount()){
+				if (!validateAmount()) {
 					amountTextBox.setFocus(true);
 				}
 			}
@@ -132,23 +131,23 @@ public class Cashpoint implements EntryPoint {
 				amountTextBox.setFocus(true);
 			}
 		});
-		
+
 		cashPointFormPanel.add(new Label("Beschreibung"));
 		cashPointFormPanel.add(descriptionTextBox);
 		descriptionTextBox.addKeyPressHandler(addBillKeyPressHandler);
 		descriptionTextBox.setStyleName("valid");
-		
+
 		cashPointFormPanel.add(addButton);
-		
+
 		addButton.addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				addPositionToBill();
 			}
-			
+
 		});
-		
+
 		addTableheader();
 
 		HorizontalPanel buttonPanel = new HorizontalPanel();
@@ -162,11 +161,11 @@ public class Cashpoint implements EntryPoint {
 		RootPanel.get("cashPointBill").add(billTable);
 		RootPanel.get("cashPointToolBar").add(buttonPanel);
 		RootPanel.get("cashPointAmount").add(amountPanel);
-		
+
 		RootPanel.get("Gewinn").add(gewinnLabel);
-		
+
 		RootPanel.get("Umsatz").add(umsatzLabel);
-		
+
 		dialogBox.setAnimationEnabled(true);
 		dialogBox.setGlassEnabled(true);
 		dialogBox.add(closeDialogButton);
@@ -185,11 +184,9 @@ public class Cashpoint implements EntryPoint {
 			public void onKeyPress(KeyPressEvent event) {
 				if (event.getCharCode() == '5' && event.isControlKeyDown()) {
 					amountTextBox.setText("0,50");
-				} else if (event.getCharCode() == '6'
-						&& event.isControlKeyDown()) {
+				} else if (event.getCharCode() == '6' && event.isControlKeyDown()) {
 					amountTextBox.setText("1,50");
-				} else if (event.getCharCode() == '7'
-						&& event.isControlKeyDown()) {
+				} else if (event.getCharCode() == '7' && event.isControlKeyDown()) {
 					amountTextBox.setText("2,50");
 				}
 			}
@@ -204,16 +201,14 @@ public class Cashpoint implements EntryPoint {
 				dialogBox.show();
 				dialogBox.center();
 
-				RequestBuilder builder = new RequestBuilder(
-						RequestBuilder.POST, SERVICE_URL + "/rest/v1/purchase");
+				RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, SERVICE_URL + "/rest/v1/purchase");
 
 				JSONObject purchaseRequest = new JSONObject();
 				JSONArray positions = new JSONArray();
 
 				for (int row = 1; row < billTable.getRowCount(); row++) {
 					long basarNumber = Long.valueOf(billTable.getText(row, 0));
-					double amount = Double.valueOf(billTable.getText(row, 1)
-							.replace(',', '.'));
+					double amount = Double.valueOf(billTable.getText(row, 1).replace(',', '.'));
 					String description = billTable.getText(row, 2);
 					JSONObject position = new JSONObject();
 					position.put("basarNumber", new JSONNumber(basarNumber));
@@ -226,64 +221,56 @@ public class Cashpoint implements EntryPoint {
 				try {
 					builder.setHeader("Content-Type", "application/json");
 
-					builder.sendRequest(purchaseRequest.toString(),
-							new RequestCallback() {
+					builder.sendRequest(purchaseRequest.toString(), new RequestCallback() {
 
-								public void onError(Request request,
-										Throwable exception) {
-									dialogBox
-											.setText("Es ist ein Fehler beim speichern aufgetretten !!!");
-								}
+						public void onError(Request request, Throwable exception) {
+							dialogBox.setText("Es ist ein Fehler beim speichern aufgetretten !!!");
+						}
 
-								public void onResponseReceived(Request request,
-										Response response) {
-									if (200 == response.getStatusCode()) {
-										billTable.removeAllRows();
-										amountLabel.setText("0,0");
-										addTableheader();
-										
-										JSONObject jsonResponse = (JSONObject)JSONParser.parse(response.getText());
-										gewinnLabel.setText(jsonResponse.get("gewinn").isString().stringValue());
-										umsatzLabel.setText(jsonResponse.get("umsatz").isString().stringValue());
-										
-										dialogBox.hide();
-										basarNumberTextBox.setFocus(true);
-									} else {
-										dialogBox
-												.setText("Es ist ein Fehler beim speichern aufgetretten !!!");
-									}
-								}
-							});
+						public void onResponseReceived(Request request, Response response) {
+							if (200 == response.getStatusCode()) {
+								billTable.removeAllRows();
+								amountLabel.setText("0,0");
+								addTableheader();
+
+								JSONObject jsonResponse = (JSONObject) JSONParser.parse(response.getText());
+								gewinnLabel.setText(jsonResponse.get("gewinn").isString().stringValue());
+								umsatzLabel.setText(jsonResponse.get("umsatz").isString().stringValue());
+
+								dialogBox.hide();
+								basarNumberTextBox.setFocus(true);
+							} else {
+								dialogBox.setText("Es ist ein Fehler beim speichern aufgetretten !!!");
+							}
+						}
+					});
 				} catch (RequestException e) {
 					// TODO Logging
 				}
 			}
 
 		});
-		
-		RequestBuilder builder = new RequestBuilder(
-				RequestBuilder.POST, SERVICE_URL + "/rest/v1/info");
+
+		RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, SERVICE_URL + "/rest/v1/info");
 		try {
 			builder.setHeader("Content-Type", "application/json");
 
 			builder.sendRequest(null, new RequestCallback() {
 
-						public void onError(Request request,
-								Throwable exception) {
-							dialogBox.setText("Backend not avaviable");
-						}
+				public void onError(Request request, Throwable exception) {
+					dialogBox.setText("Backend not avaviable");
+				}
 
-						public void onResponseReceived(Request request,
-								Response response) {
-							if (200 == response.getStatusCode()) {
-								JSONObject jsonResponse = (JSONObject)JSONParser.parse(response.getText());
-								gewinnLabel.setText(jsonResponse.get("gewinn").isString().stringValue());
-								umsatzLabel.setText(jsonResponse.get("umsatz").isString().stringValue());
-							} else {
-								dialogBox.setText("Backend not avaviable");
-							}
-						}
-					});
+				public void onResponseReceived(Request request, Response response) {
+					if (200 == response.getStatusCode()) {
+						JSONObject jsonResponse = (JSONObject) JSONParser.parse(response.getText());
+						gewinnLabel.setText(jsonResponse.get("gewinn").isString().stringValue());
+						umsatzLabel.setText(jsonResponse.get("umsatz").isString().stringValue());
+					} else {
+						dialogBox.setText("Backend not avaviable");
+					}
+				}
+			});
 		} catch (RequestException e) {
 			// TODO Logging
 		}
@@ -297,28 +284,30 @@ public class Cashpoint implements EntryPoint {
 		billTable.getRowFormatter().setStyleName(0, "table-header");
 	}
 
+	final RegExp amountRegExp = RegExp.compile("^[0-9]*,?[0-9]*$");
+
 	protected boolean validateAmount() {
 		String amount = amountTextBox.getText();
 		if (amount.trim().length() == 0) {
 			amountTextBox.setStyleName("error");
 			return false;
-		} else if(amount.trim().equals(",")){
+		} else if (amount.trim().equals(",")) {
 			amountTextBox.setStyleName("error");
 			return false;
-		}
-		else {
+		} else if (amountRegExp.exec(amount) == null) {
+			amountTextBox.setStyleName("error");
+			return false;
+		} else {
 			int kommaIndex = amount.indexOf(',');
-			if(kommaIndex < 0)
+			if (kommaIndex < 0)
 				kommaIndex = amount.indexOf('.');
-			if(kommaIndex >= 0){
-				String str = amount.substring(kommaIndex+1, amount.length());
-				if(str.equals("50") || str.equals("00") || str.equals("0") || str.equals("5")){
+			if (kommaIndex >= 0) {
+				String str = amount.substring(kommaIndex + 1, amount.length());
+				if (str.equals("50") || str.equals("00") || str.equals("0") || str.equals("5")) {
 					amountTextBox.setStyleName("valid");
 					return true;
 				}
-			}
-			else
-			{
+			} else {
 				amountTextBox.setStyleName("valid");
 				return true;
 			}
@@ -332,7 +321,8 @@ public class Cashpoint implements EntryPoint {
 	boolean isBasarNumberValid = false;
 
 	protected void validateBasarNumber() {
-		String url = com.google.gwt.http.client.URL.encode(SERVICE_URL + "/rest/v1/seller/"+ basarNumberTextBox.getText());
+		String url = com.google.gwt.http.client.URL.encode(SERVICE_URL + "/rest/v1/seller/"
+				+ basarNumberTextBox.getText());
 		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 		try {
 			builder.sendRequest(null, new RequestCallback() {
@@ -341,8 +331,7 @@ public class Cashpoint implements EntryPoint {
 					// TODO Logging
 				}
 
-				public void onResponseReceived(Request request,
-						Response response) {
+				public void onResponseReceived(Request request, Response response) {
 					if (200 == response.getStatusCode()) {
 						basarNumberTextBox.setStyleName("valid");
 						isBasarNumberValid = true;
@@ -358,14 +347,14 @@ public class Cashpoint implements EntryPoint {
 			// TODO Logging
 		}
 	}
-	
+
 	Command command = new Command() {
-		
+
 		@Override
 		public void execute() {
 		}
 	};
-	
+
 	protected void addPositionToBill() {
 		validateBasarNumber();
 		command = new Command() {
@@ -386,8 +375,8 @@ public class Cashpoint implements EntryPoint {
 						@Override
 						public void onClick(ClickEvent event) {
 							Cell cellForEvent = billTable.getCellForEvent(event);
-							double amountValue = priceToDouble(amountLabel.getText()) -
-							priceToDouble(billTable.getText(cellForEvent.getRowIndex(), 1));
+							double amountValue = priceToDouble(amountLabel.getText())
+									- priceToDouble(billTable.getText(cellForEvent.getRowIndex(), 1));
 							amountLabel.setText(String.valueOf(amountValue).replace('.', ','));
 							billTable.removeRow(cellForEvent.getRowIndex());
 						}
@@ -397,21 +386,21 @@ public class Cashpoint implements EntryPoint {
 					basarNumberTextBox.setText("");
 					amountTextBox.setText("1,00");
 					descriptionTextBox.setText("");
-					
+
 					double amountValue = priceToDouble(amountLabel.getText())
-					+ Double.valueOf(amount.replace(',', '.'));
+							+ Double.valueOf(amount.replace(',', '.'));
 					amountLabel.setText(String.valueOf(amountValue).replace('.', ','));
 					basarNumberTextBox.setFocus(true);
 
 					isBasarNumberValid = false;
 				}
-				command =  new Command() {
+				command = new Command() {
 					@Override
 					public void execute() {
 					}
 				};
 			}
-			
+
 		};
 	}
 
@@ -420,4 +409,5 @@ public class Cashpoint implements EntryPoint {
 		Double d = Double.valueOf(str);
 		return d.doubleValue();
 	}
+
 }
