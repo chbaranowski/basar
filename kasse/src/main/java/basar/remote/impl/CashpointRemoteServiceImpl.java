@@ -2,9 +2,9 @@ package basar.remote.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import basar.dao.PositionDao;
 import basar.dao.SellerDao;
@@ -16,6 +16,8 @@ import basar.remote.CashpointRemoteService;
 
 @Service("cashpointRemoteService")
 public class CashpointRemoteServiceImpl implements CashpointRemoteService {
+	
+	private static final Logger logger = Logger.getLogger(CashpointRemoteServiceImpl.class);
 
 	private SaleService saleService;
 	
@@ -42,8 +44,8 @@ public class CashpointRemoteServiceImpl implements CashpointRemoteService {
 		try{
 			saleService.purchase(sale);
 		}
-		catch(Exception e){
-			System.out.println(e);
+		catch(Exception exp){
+			logger.info("purchase failed for sale.", exp);
 		}
 	}
 

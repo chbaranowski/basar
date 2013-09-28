@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class PositionDTO implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private long basarNumber;
 	
 	private double amount;

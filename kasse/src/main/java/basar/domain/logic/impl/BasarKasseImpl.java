@@ -2,8 +2,6 @@ package basar.domain.logic.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -23,9 +21,6 @@ import basar.domain.logic.DocumentService;
 import basar.domain.logic.SaleService;
 
 import com.google.common.base.Optional;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 
 @Service("basarKasse")
 public class BasarKasseImpl implements BasarKasseFacade {
@@ -41,15 +36,6 @@ public class BasarKasseImpl implements BasarKasseFacade {
 	private TreasuryBalanceTransformer transformer;
 
 	private CashpointRemoteDispatcher cashpointRemoteDispatcher;
-
-//	private LoadingCache<PositionKey, Position> positionCache = CacheBuilder
-//			.newBuilder().maximumSize(10).expireAfterWrite(1, TimeUnit.MINUTES)
-//			.build(new CacheLoader<PositionKey, Position>() {
-//				@Override
-//				public Position load(PositionKey key) throws Exception {
-//					return positionDao.getPosition(key);
-//				}
-//			});
 
 	@Autowired
 	public void setCashpointRemoteDispatcher(
@@ -143,12 +129,6 @@ public class BasarKasseImpl implements BasarKasseFacade {
 
 	@Cacheable(value = "positions", key = "#positionKey")
 	public Position getPosition(PositionKey positionKey) {
-//		try {
-//			return positionCache.get(positionKey);
-//		} catch (ExecutionException e) {
-//			e.printStackTrace();
-//			throw new IllegalStateException();
-//		}
 		return positionDao.getPosition(positionKey);
 	}
 

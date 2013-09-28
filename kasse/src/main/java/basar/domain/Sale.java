@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Sale implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private final List<Position> positions = new ArrayList<Position>();
 	
 	public void addPosition(Position position){

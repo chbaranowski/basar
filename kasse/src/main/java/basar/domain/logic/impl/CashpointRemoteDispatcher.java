@@ -2,6 +2,7 @@ package basar.domain.logic.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import basar.remoteclient.CashpointRemoteClient;
 
 @Service
 public class CashpointRemoteDispatcher {
+	
+	private static final Logger logger = Logger.getLogger(CashpointRemoteDispatcher.class);
 
 	private List<CashpointRemoteClient> remoteCashpoints;
 
@@ -25,19 +28,19 @@ public class CashpointRemoteDispatcher {
 		Seller remote = null;
 		for (CashpointRemoteClient client : remoteCashpoints) {
 			try {
-				CashpointRemoteService service = client.getService();
-				if (service != null) {
+				Optional<CashpointRemoteService> serviceRef = Optional.fromNullable(client.getService());
+				if (serviceRef.isPresent()) {
+					CashpointRemoteService service = serviceRef.get();
 					remote = service.getSeller(basarNumber);
 					if (remote != null) {
 						break;
 					}
 				}
-			} catch (Throwable e) {
-				System.out.println("Remote Kasse nicht erreicht");
-				System.out.println(e);
+			} catch (Throwable exp) {
+				logger.info("find seller on remote basar failed", exp);
 			}
 		}
-		return Optional.of(remote);
+		return Optional.fromNullable(remote);
 	}
 
 }

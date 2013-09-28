@@ -1,18 +1,11 @@
 package basar.dao.jpa;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.sql.DataSource;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +14,6 @@ import basar.dao.PositionDao;
 import basar.domain.Configuration;
 import basar.domain.Position;
 import basar.domain.PositionKey;
-import basar.domain.PositionType;
-import basar.domain.Seller;
 
 @Repository
 public class PositionDaoImpl implements PositionDao {
@@ -55,7 +46,7 @@ public class PositionDaoImpl implements PositionDao {
 
 	@Transactional
 	public void updatePosition(Position position) {
-		Position merge = entityManager.merge(position);
+		entityManager.merge(position);
 	}
 	
 	@Transactional
@@ -84,11 +75,9 @@ public class PositionDaoImpl implements PositionDao {
 		this.number++;
 		return this.number;
 	}
-
-	@Autowired
-	private DataSource dataSource;
 	
 	@Transactional(readOnly=true)
+	@SuppressWarnings("unchecked")
 	public List<Position> getPositionList() {
 		Query query = entityManager.createQuery("SELECT p FROM Position p ORDER BY p.createTime DESC");
 		return query.getResultList();

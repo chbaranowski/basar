@@ -28,9 +28,10 @@ public class SellerDaoImpl implements SellerDao {
 	}
 	
 	@Transactional(readOnly=true)
+	@SuppressWarnings("unchecked")
 	public List<Seller> getSellerList() {
 		Query query = entityManager.createQuery("SELECT e FROM Seller e ORDER BY e.basarNumber ASC");
-		return (List<Seller>) query.getResultList();
+		return query.getResultList();
 	}
 
 	@Transactional
@@ -46,7 +47,7 @@ public class SellerDaoImpl implements SellerDao {
 	
 	@Transactional
 	public void updateSeller(Seller seller) {
-		Seller merge = entityManager.merge(seller);
+		entityManager.merge(seller);
 	}
 
 }

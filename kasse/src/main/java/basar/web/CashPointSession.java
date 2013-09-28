@@ -14,6 +14,8 @@ import basar.domain.Sale;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class CashPointSession implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private Sale sale = new Sale();
 	
 	public void addPosition(Position position) {

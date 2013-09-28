@@ -12,11 +12,6 @@ import basar.domain.Seller;
 @Transactional
 public interface SellerRepository extends Repository<Seller, Long>, CrudRepository<Seller, Long> {
 	
-	
-	// Seller save(Seller seller);
-	
-	// Seller findOne(Long basarnumber);
-
 	Iterable<Seller> findAll(Sort sort);
 	
 	List<Seller> findByName(String name, Sort sort);
